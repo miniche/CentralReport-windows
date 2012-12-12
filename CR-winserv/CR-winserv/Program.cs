@@ -13,12 +13,17 @@ namespace CR_winserv
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[] 
-			{ 
-				new CRService() 
-			};
-            ServiceBase.Run(ServicesToRun);
+            #if (!DEBUG)
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[] 
+			    { 
+				    new CRService() 
+			    };
+                ServiceBase.Run(ServicesToRun);
+            #else
+                CRService service = new CRService();
+                service.myCustomTest();
+            #endif
         }
     }
 }
